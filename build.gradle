@@ -1,0 +1,32 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+
+sourceCompatibility = 1.7
+
+//源码结构
+sourceSets {
+    main {
+        java {srcDir 'src/main/java'}
+    }
+}
+tasks.withType(JavaCompile) { options.encoding = "UTF-8" }
+tasks.withType(Javadoc) { options.encoding = "UTF-8" }
+configurations { compile.exclude module: 'log4j' }
+
+/*仓库*/
+repositories {
+	mavenCentral()
+	maven { url 'http://maven.springframework.org/snapshot' }
+	maven { url 'http://maven.springframework.org/milestone' }
+	maven { url 'http://repository.springsource.com/maven/bundles/external' }
+	maven { url 'http://repository.springsource.com/maven/bundles/release' }
+	maven { url 'http://repository.springsource.com/maven/bundles/milestone' }
+}
+dependencies {
+	compile(
+		/*		json		*/
+		'com.alibaba:fastjson:1.2.6'
+	)
+}
+
